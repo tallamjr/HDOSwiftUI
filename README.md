@@ -4,6 +4,8 @@ Attempting `#100DaysOfSwiftUI` by following Paul Hudson's ([@twostraws](https://
 
 <img src="https://img.icons8.com/color/452/swiftui.png" alt="drawing" width="400"/>
 
+[***Test Yourself***](https://www.hackingwithswift.com/review#start)
+
 ### [Day 1](https://www.hackingwithswift.com/100/swiftui/1) : Simple Data Types
 
 **Strings and Integers**
