@@ -1,2 +1,5 @@
-# HDOSwiftUI
-#100DaysOfSwiftUI
+# 100 Days of `SwiftUI`
+
+`#100DaysOfSwiftUI`
+
+### Day 1
