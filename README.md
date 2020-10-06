@@ -2,6 +2,6 @@
 
 `#100DaysOfSwiftUI`
 
-<img src="https://developer.apple.com/news/images/og/swiftui-og.png" alt="drawing" width="400"/>
+<img src="https://img.icons8.com/color/452/swiftui.png" alt="drawing" width="400"/>
 
 ### Day 1
