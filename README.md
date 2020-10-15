@@ -305,3 +305,241 @@ enum Planet: Int {
 > 6. Enums are a way of grouping related values so you can use them without spelling mistakes.
 > 7. You can attach raw values to enums so they can be created from integers or strings, or you can
 >    add associated values to store additional information about each case.
+
+### [Day 3](https://www.hackingwithswift.com/100/swiftui/3) : Operators and Conditions
+
+> Remember, Swift is a type-safe language, which means it won’t let you mix types. For example, you
+> can’t add an integer to a string because it doesn’t make any sense.
+
+
+```python
+if firstCard + secondCard == 2 {
+    print("Aces – lucky!")
+} else if firstCard + secondCard == 21 {
+    print("Blackjack!")
+} else {
+    print("Regular cards")
+}
+```
+
+**Combining conditions**
+
+```python
+let age1 = 12
+let age2 = 21
+
+if age1 > 18 && age2 > 18 {
+    print("Both are over 18")
+}
+```
+
+> That print() call will only happen if both ages are over 18, which they aren’t. In fact, Swift
+> won’t even bother checking the value of age2 because it can see that age1 already failed the test.
+
+> The alternative to && is ||, which evaluates as true if either item passes the test. For example we
+> could print a message if either age is over 18:
+
+```python
+if age1 > 18 || age2 > 18 {
+    print("At least one is over 18")
+}
+```
+
+**The ternary operator**
+
+> Swift has a rarely used operator called the ternary operator. It works with three values at once,
+> which is where its name comes from: it checks a condition specified in the first value, and if
+> it’s true returns the second value, but if it’s false returns the third value.
+
+> The ternary operator is a condition plus true or false blocks all in one, split up by a question
+> mark and a colon, all of which which makes it rather hard to read. Here’s an example:
+
+```python
+let firstCard = 11
+let secondCard = 10
+print(firstCard == secondCard ? "Cards are the same" : "Cards are different")
+```
+
+> That checks whether the two cards are the same, then prints “Cards are the same” if the condition
+> is true, or “Cards are different” if it’s false. We could write the same code using a regular
+> condition:
+
+```python
+if firstCard == secondCard {
+    print("Cards are the same")
+} else {
+    print("Cards are different")
+}
+```
+
+**Switch statements**
+
+```python
+let weather = "sunny"
+
+switch weather {
+case "rain":
+    print("Bring an umbrella")
+case "snow":
+    print("Wrap up warm")
+case "sunny":
+    print("Wear sunscreen")
+default:
+    print("Enjoy your day!")
+}
+```
+> Swift will only run the code inside each case. If you want execution to continue on to the next
+> case, use the fallthrough keyword like this:
+
+```python
+switch weather {
+case "rain":
+    print("Bring an umbrella")
+case "snow":
+    print("Wrap up warm")
+case "sunny":
+    print("Wear sunscreen")
+    fallthrough
+default:
+    print("Enjoy your day!")
+}
+```
+
+**Summary**
+
+1. Swift has operators for doing arithmetic and for comparison; they mostly work like you already
+   know.
+2. There are compound variants of arithmetic operators that modify their variables in place: +=, -=,
+   and so on.
+3. You can use if, else, and else if to run code based on the result of a condition.
+4. Swift has a ternary operator that combines a check with true and false code blocks. Although you
+   might see it in other code, I wouldn’t recommend using it yourself.
+5. If you have multiple conditions using the same value, it’s often clearer to use switch instead.
+6. You can make ranges using ..< >and ... depending on whether the last number should be excluded or
+   included
+
+### [Day 4](https://www.hackingwithswift.com/100/swiftui/4) : Loops
+
+**For loops**
+
+```python
+let count = 1...10
+for number in count {
+    print("Number is \(number)")
+}
+let albums = ["Red", "1989", "Reputation"]
+
+for album in albums {
+    print("\(album) is on Apple Music")
+}
+```
+> If you don’t use the constant that for loops give you, you should use an underscore instead so
+> that Swift doesn’t create needless values:
+
+```python
+print("Players gonna ")
+
+for _ in 1...5 {
+    print("play")
+}
+```
+
+**While loops**
+
+```python
+var number = 1
+
+while number <= 20 {
+    print(number)
+    number += 1
+}
+
+print("Ready or not, here I come!")
+```
+
+**Repeat loops**
+
+```python
+var number = 1
+
+repeat {
+    print(number)
+    number += 1
+} while number <= 20
+
+print("Ready or not, here I come!")
+```
+
+**Exiting loops**
+
+Use `break` keyword
+
+```python
+while countDown >= 0 {
+    print(countDown)
+
+    if countDown == 4 {
+        print("I'm bored. Let's go now!")
+        break
+    }
+
+    countDown -= 1
+}
+```
+**Exiting multiple loops**
+
+```python
+for i in 1...10 {
+    for j in 1...10 {
+        let product = i * j
+        print ("\(i) * \(j) is \(product)")
+    }
+}
+```
+> If we wanted to exit part-way through we need to do two things. First, we give the outside loop a
+> label, like this:
+
+```python
+outerLoop: for i in 1...10 {
+    for j in 1...10 {
+        let product = i * j
+        print ("\(i) * \(j) is \(product)")
+
+        if product == 50 {
+            print("It's a bullseye!")
+            break outerLoop
+        }
+    }
+}
+```
+> With a regular break, only the inner loop would be exited – the outer loop would continue where it
+> left off.
+
+**Skipping items**
+
+Use `coontinue` keyword
+
+```python
+for i in 1...10 {
+    if i % 2 == 1 {
+        continue
+    }
+
+    print(i)
+}
+```
+**Summary**
+
+1. Loops let us repeat code until a condition is false.
+2. The most common loop is for, which assigns each item inside the loop to a temporary constant.
+3. If you don’t need the temporary constant that for loops give you, use an underscore instead so
+   Swift can skip that work.
+4. There are while loops, which you provide with an explicit condition to check
+5. Although they are similar to while loops, repeat loops always run the body of their loop at least
+   once.
+6. You can exit a single loop using break, but if you have nested loops you need to use break
+   followed by whatever label you placed before your outer loop.
+7. You can skip items in a loop using continue.
+8. Infinite loops don’t end until you ask them to, and are made using while true. Make sure you have a
+   condition somewhere to end your infinite loops!
+
