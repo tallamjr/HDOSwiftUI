@@ -543,3 +543,175 @@ for i in 1...10 {
 8. Infinite loops don’t end until you ask them to, and are made using while true. Make sure you have a
    condition somewhere to end your infinite loops!
 
+
+### [Day 5](https://www.hackingwithswift.com/100/swiftui/5) : Functions
+
+**Writing functions**
+
+```python
+func printHelp() {
+    let message = """
+Welcome to MyApp!
+
+Run this app inside a directory of images and
+MyApp will resize them all into thumbnails
+"""
+
+    print(message)
+}
+printHelp()
+```
+
+**Accepting parameters**
+
+> To make your own functions accept parameters, give each parameter a name, then a colon, then tell
+> Swift the type of data it must be. All this goes inside the parentheses after your function name.
+
+```python
+func square(number: Int) {
+    print(number * number)
+}
+```
+> That tells Swift we expect to receive an Int, and it should be called number. This name is used
+> both inside the function when you want to refer to the parameter, but also when you run the
+> function, like this:
+
+```python
+square(number: 8)
+```
+
+**Returning values**
+
+```python
+func square(number: Int) -> Int {
+    return number * number
+}
+```
+
+**Parameter labels**
+
+
+```python
+func sayHello(to name: String) {
+    print("Hello, \(name)!")
+}
+```
+
+> The parameter is called to name, which means externally it’s called to, but internally it’s called
+> name. This gives variables a sensible name inside the function, but means calling the function
+> reads naturally:
+
+```python
+sayHello(to: "Taylor")
+```
+
+**Omitting parameter labels**
+
+```python
+func greet(_ person: String) {
+    print("Hello, \(person)!")
+}
+```
+
+**Default parameters**
+
+```python
+func greet(_ person: String, nicely: Bool = true) {
+    if nicely == true {
+        print("Hello, \(person)!")
+    } else {
+        print("Oh no, it's \(person) again...")
+    }
+}
+
+greet("Taylor")
+greet("Taylor", nicely: false)
+```
+
+**Variadic functions**
+
+> Some functions are variadic, which is a fancy way of saying they accept any number of parameters
+> of the same type. The print() function is actually variadic: if you pass lots of parameters, they
+> are all printed on one line with spaces between them:
+
+```python
+print("Haters", "gonna", "hate")
+```
+
+**Writing throwing functions**
+
+>Sometimes functions fail because they have bad input, or because something went wrong internally.
+>Swift lets us throw errors from functions by marking them as throws before their return type, then
+>using the throw keyword when something goes wrong.
+
+> First we need to define an enum that describes the errors we can throw. These must always be based
+> on Swift’s existing Error type. We’re going to write a function that checks whether a password is
+> good, so we’ll throw an error if the user tries an obvious password:
+
+
+```python
+enum PasswordError: Error {
+    case obvious
+}
+
+func checkPassword(_ password: String) throws -> Bool {
+    if password == "password" {
+        throw PasswordError.obvious
+    }
+
+    return true
+}
+```
+
+**Running throwing functions**
+
+> Swift doesn’t like errors to happen when your program runs, which means it won’t let you run an
+> error-throwing function by accident.
+
+```python
+do {
+    try checkPassword("password")
+    print("That password is good!")
+} catch {
+    print("You can't use that password.")
+}
+```
+
+**inout parameters**
+
+> All parameters passed into a Swift function are constants, so you can’t change them. If you want,
+> you can pass in one or more parameters as inout, which means they can be changed inside your
+> function, and those changes reflect in the original value outside the function.
+
+```python
+func doubleInPlace(number: inout Int) {
+    number *= 2
+}
+```
+> To use that, you first need to make a variable integer – you can’t use constant integers with
+> inout, because they might be changed. You also need to pass the parameter to doubleInPlace using
+> an ampersand, &, before its name, which is an explicit recognition that you’re aware it is being
+> used as inout.
+
+```python
+var myNum = 10
+doubleInPlace(number: &myNum)
+```
+
+**Summary**
+
+1. Functions let us re-use code without repeating ourselves.
+2. Functions can accept parameters – just tell Swift the type of each parameter.
+3. Functions can return values, and again you just specify what type will be sent back. Use tuples
+   if you want to return several things.
+4. You can use different names for parameters externally and internally, or omit the external name
+   entirely.
+5. Parameters can have default values, which helps you write less code when specific values are
+   common.
+6. Variadic functions accept zero or more of a specific parameter, and Swift converts the input to
+   an array.
+7. Functions can throw errors, but you must call them using try and handle errors using catch.
+8. You can use inout to change variables inside a function, but it’s usually better to return a new
+   value.
+
+### [Day 6](https://www.hackingwithswift.com/100/swiftui/6) : Closures Part One
